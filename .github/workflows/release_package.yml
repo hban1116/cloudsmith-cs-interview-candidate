@@ -37,7 +37,9 @@ jobs:
       - name: List directory contents
         run: ls -la dist/
         shell: bash
-
+      - name: Install Cloudsmith CLI
+        run: |
+          pip install --upgrade cloudsmith-cli
       - name: Push package to Cloudsmith
         run: |
           if ! ls dist/*.tar.gz 1> /dev/null 2>&1; then
