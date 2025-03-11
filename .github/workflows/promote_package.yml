@@ -47,9 +47,9 @@ jobs:
       - name: Get Ready Packages and Promote
         run: |
           # Query for packages tagged with "ready-for-production"
-          PACKAGE_DATA=$(cloudsmith list package ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }} -F json)
+          PACKAGE_DATA=$(cloudsmith list package ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }} --verbose -F json)
 
-          IDENTIFIER=$(echo "$PACKAGE_DATA" | jq -r '.data[] | select(.tags | index("ready-for-production")) | .identifier_perm')
+          IDENTIFIER=$(echo "$PACKAGE_DATA" | jq -r '.data[] | select(.tags.info[]? == "ready-for-production") | .identifier_perm')
 
           if [ -z "$IDENTIFIER" ] || [ "$IDENTIFIER" = "null" ]; then
             echo "No packages tagged as ready-for-production"
