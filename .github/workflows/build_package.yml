@@ -3,10 +3,10 @@ name: Build Python Package
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 permissions:
   contents: read
@@ -36,7 +36,7 @@ jobs:
       - name: Build package
         run: python -m build
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-package
           path: dist/
