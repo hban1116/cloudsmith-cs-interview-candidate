@@ -42,7 +42,7 @@ jobs:
           echo "Found package identifier: $IDENTIFIER"
 
           # Tagging the package
-          cloudsmith tags set ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/$IDENTIFIER ready-for-production
+          cloudsmith tags add ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/$IDENTIFIER ready-for-production
 
       - name: Get Ready Packages and Promote
         run: |
